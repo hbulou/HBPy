@@ -5,6 +5,7 @@ import copy
 import matplotlib.pyplot as plt
 import pandas as pd
 import random
+from itertools import islice
 #from mendeleev import element
 
 #me=9.1093897e-31        /* electron mass */
@@ -72,59 +73,68 @@ class Crystal:
 
         self.filenfo = FileInfo(filename)
         print(f"# Crystal.py > loading {filename}")
+        if filename.split(".")[-1] == "xyz":
+            self.filenfo.nstruct=1
+            
+            with open(filename, 'r') as f:
+                # 1. Lire le nombre d'atomes (ligne 0)
+                line0 = f.readline()
+                if not line0: return
+                self.natoms = int(line0.strip())
+                
+                # 2. Sauter la ligne de commentaire (ligne 1)
+                next(f)
+    
+                # 3. Lire EXACTEMENT self.natoms lignes après les deux premières
+                # islice(itérable, start, stop)
+                self.atoms = []
+                for i, line in enumerate(islice(f, 0, self.natoms)):
+                    parts = line.split()
+                    if not parts: continue # Sécurité ligne vide
         
-        file = open(filename, 'r')
-        data=file.readlines()
-        file.close()
-
-        i=0
-        self.filenfo.nstruct=0
-        struct=[]
-        
-        while i<len(data):
-            if len(data[i].split()) == 1:
-                atoms=[]
-                self.filenfo.nstruct=self.filenfo.nstruct+1
-                natom=int(data[i]) ; i=i+1
-                i=i+1
-                for j in range(natom):
-                    line=data[i].split()
-                    idx=len(self.atoms)
-                    atoms.append(
+                    self.atoms.append(
                         Atom(
-                            elt=line[0],
-                            q=np.array([float(line[1]),
-                                        float(line[2]),
-                                        float(line[3])]),
-                            idx=idx))
-
-                    i=i+1
-                struct.append(atoms)
-                del atoms
-        print(filename,len(data),len(struct)," structure(s)")
-        self.atoms=struct[-1]
-        self.reindex()
-        self.status = [True]*len(self.atoms)
+                            elt=parts[0],
+                            q=np.array([float(parts[1]), float(parts[2]), float(parts[3])]),
+                            idx=i
+                        )
+                    )
+            self.reindex()
+            self.status = [True]*len(self.atoms)
+        else :
+            print(f"Only simple xyz files can be read!")
+                
+            # i=0
+            # self.filenfo.nstruct=0
+            # struct=[]
+        
+            # while i<len(data):
+            #     if len(data[i].split()) == 1:
+            #         atoms=[]
+            #         self.filenfo.nstruct=self.filenfo.nstruct+1
+            #         natom=int(data[i]) ; i=i+1
+            #         i=i+1
+            #         for j in range(natom):
+            #             line=data[i].split()
+            #             idx=len(self.atoms)
+            #             atoms.append(
+            #                 Atom(
+            #                     elt=line[0],
+            #                     q=np.array([float(line[1]),
+            #                                 float(line[2]),
+            #                                 float(line[3])]),
+            #                     idx=idx))
+                        
+            #             i=i+1
+            #         struct.append(atoms)
+            #         del atoms
+            # print(filename,len(data),len(struct)," structure(s)")
+            # self.atoms=struct[-1]
+            # self.reindex()
+            # self.status = [True]*len(self.atoms)
         
     def load_file(self,filename):
         self.file_info(filename)
-        #print(len(self.natoms)) ; exit()
-        # del self.atoms
-        # self.atoms=[]
-        # file = open(filename, 'r')
-        # data=file.readlines()
-        # file.close()
-        # #print(200*"-")
-        # for i in range(2,len(data)):
-        #     line=data[i].split()
-        #     idx=len(self.atoms)
-        #     self.atoms.append(
-        #         Atom(
-        #             elt=line[0],
-        #             q=np.array([float(line[1]),
-        #                         float(line[2]),
-        #                         float(line[3])]),
-        #             idx=idx))
         self.MassCenter()
         self.status = [True]*len(self.atoms)
         self.update_distances()
