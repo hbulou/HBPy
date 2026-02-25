@@ -1,6 +1,6 @@
 import numpy as np
-from bulou.Atom import Atom
-from bulou.Tools import FileInfo
+from HBPy.Atom import Atom
+from HBPy.Tools import FileInfo
 import copy
 import matplotlib.pyplot as plt
 import pandas as pd

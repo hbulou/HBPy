@@ -1,5 +1,5 @@
 import numpy as np
-import bulou.ForceField
+import HBPy.ForceField
 
 # Atomic masses are based on:
 #
