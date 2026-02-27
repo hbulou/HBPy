@@ -1,5 +1,5 @@
 import numpy as np
-import HBPy.ForceField
+import Molecule.ForceField
 
 # Atomic masses are based on:
 #

@@ -1,6 +1,6 @@
 import numpy as np
-from HBPy.Atom import Atom
-from HBPy.Tools import FileInfo
+from Molecule.Tools import FileInfo
+from Molecule.Atom import Atom
 import copy
 import matplotlib.pyplot as plt
 import pandas as pd
