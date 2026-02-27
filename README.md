@@ -14,6 +14,10 @@ cd HBPy
 ```sh
 source ~/venv/ATOMOD/bin/activate
 ```
+Rq : sur les serveurs de calculs tels que hpc il peut être nécessaire de charger le module python
+```sh
+module load python
+```
 * Installer le packahe Molecule
 ```sh
 pip install -e .
