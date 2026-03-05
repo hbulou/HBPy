@@ -16,8 +16,8 @@ import math  # NEW
 import numpy
 import sys
 sys.path.append('/home/bulou/src/lib/site-packages/')
-from HBPy.Atom import Atom,COV_RADIUS,CPK_COLOR
-from HBPy.Crystal import Crystal
+from Molecule.Atom import Atom,COV_RADIUS,CPK_COLOR
+from Molecule.Crystal import Crystal
 
 
 
