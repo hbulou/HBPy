@@ -387,6 +387,11 @@ class Atom:
         self.Etot=0.0
         self.Eb=0.0
 
+    def distance_from_(self,q=np.zeros(3)):
+        d=0.0
+        for i in range(3):
+            d+=(self.q[i]-q[i])**2
+        return np.sqrt(d)
     def duplicate(self):
         """Crée une copie indépendante de manière optimisée."""
         # 1. On crée une nouvelle instance avec les paramètres de base copiés
