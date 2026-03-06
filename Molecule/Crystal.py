@@ -56,6 +56,20 @@ class Crystal:
                     self.atoms.append(Atom(elt=elt,q=np.array([x,y+0.5*a,z+0.5*a]),idx=idx))
         self.MassCenter()
         self.status = [True]*len(self.atoms)
+    def core_shell(self,composition):
+        self.get_element_distribution()
+        self.MassCenter()
+        self.origin_at_mass_center()
+        self.get_structure()
+        for atm in self.atoms:
+            d=atm.distance_from_(self.MC)
+            for rmax, elt in composition:
+                if d<=rmax:
+                    atm.elt=elt
+                    break
+        self.get_element_distribution()
+
+
     def duplicate(self):
         new_crystal=Crystal()
         for i in range(len(self.atoms)):
