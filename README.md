@@ -18,7 +18,7 @@ Rq : sur les serveurs de calculs tels que hpc il peut être nécessaire de charg
 ```sh
 module load python
 ```
-* Installer le packahe Molecule
+* Installer le package Molecule
 ```sh
 pip install -e .
 ```
