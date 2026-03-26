@@ -1,24 +1,6 @@
-# Bibliothèque python de mes fonctions : HBPy
+Chaque problème d'apprentissage par renforcement peut être décomposé en cinq composantes essentielles.
+# L'agent
+L' agent est l'apprenant et le décideur. C'est l'entité que nous essayons d'éduquer.
 
-# Installation
-* choisir un répertoire où sytocker HBPy et s'y placer
-* cloner HBPy
-```sh
-git clone git@github.com:hbulou/HBPy.git
-````
-* en principe un répertoire HBPy a été créé. Aller dans HBPy
-```sh
-cd HBPy
-```
-* charger l'environnement ATOMOD
-```sh
-source ~/venv/ATOMOD/bin/activate
-```
-Rq : sur les serveurs de calculs tels que hpc il peut être nécessaire de charger le module python
-```sh
-module load python
-```
-* Installer le package Molecule
-```sh
-pip install -e .
-```
+* Analogie : Le chien est l’agent. Son but est de déterminer comment obtenir le plus de friandises.
+* En pratique : un agent est un logiciel. Il peut s’agir de l’IA qui contrôle un personnage de jeu vidéo, d’un bras robotisé qui apprend à saisir des objets ou d’un algorithme qui apprend à investir en bourse.
